@@ -1,0 +1,20 @@
+{
+	"name": "plunker.service.Project",
+	"description": "The sample service interface",
+	"methods": {
+		"getSelectedProjectFiles": {
+			"description": "Get list of the files in a selected project",
+			"returns": {
+				"type": "object",
+				"description": "List of files"
+			}
+		},
+		"hasWebApp": {
+			"description": "Get list of the files in a selected project",
+			"returns": {
+				"type": "boolean",
+				"description": "has webapp folder"
+			}
+		}
+	}
+}

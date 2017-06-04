@@ -1,0 +1,11 @@
+{
+	"name": "plunkerexport",
+	"title": "plunkerexport",
+	"version": "1.0.0",
+	"description": "Export to plunker",
+	"homepage": "",
+	"icon": "",
+	"bundledPlugins": {
+		"plunker": "file:plunker"
+	}
+}

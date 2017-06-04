@@ -1,0 +1,65 @@
+{
+	"name": "plunker",
+	"description": "Plunker",
+	"i18n": "plunker/i18n/i18n",
+	"requires": {
+		"services": [
+			"ui5projecthandler",
+			"selection",
+    		"perspective",
+			"uiadaptation",
+			"content",
+			"usernotification",
+			"log",
+			"command",
+			"commandGroup"
+		]
+	},
+	"provides": {
+		"services": {
+			"message": {
+				"implements": "plunker.service.Message",
+				"module": "plunker/service/Message"
+			},
+			"plunker": {
+				"implements": "plunker.service.Plunker",
+				"module": "plunker/service/Plunker"
+			},
+			"project": {
+				"implements": "plunker.service.Project",
+				"module": "plunker/service/Project"
+			}
+		},
+
+		"interfaces": {
+			"plunker.service.Message": "plunker/service/Message",
+			"plunker.service.Plunker": "plunker/service/Plunker",
+			"plunker.service.Project": "plunker/service/Project"
+		}
+	},
+	"configures": {
+		"services": {
+			"command:commands": [{
+				"id": "plunker.ExportPlunker",
+				"label": "{i18n>command_exportpluncker}",
+				"service": "plunker/command/ExportPlunker"
+			}],
+
+			"commandGroup:groups": [{
+				"id": "repositoryBrowserContextMenu.exportPluncker"
+			}],
+
+			"commandGroup:items": [{
+				"parent": "repositoryBrowserContextMenu",
+				"type": "inline",
+				"group": "repositoryBrowserContextMenu.exportPluncker",
+				"prio": 100
+			},  {
+				"parent": "repositoryBrowserContextMenu.exportPluncker",
+				"type": "action",
+				"command": "plunker.ExportPlunker",
+				"prio": 10
+			}]
+		}
+	}
+}

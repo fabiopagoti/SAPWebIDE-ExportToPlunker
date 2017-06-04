@@ -1,0 +1,18 @@
+{
+	"name": "plunker.service.Plunker",
+	"description": "The sample service interface",
+	"methods": {
+		"sendFilesToPlunker": {
+			"description": "send to plunker",
+			"params": [{
+				"name": "files",
+				"type": "object",
+				"description": "files"
+			}],
+			"returns": {
+				"type": "string",
+				"description": "plunker url"
+			}
+		}
+	}
+}
