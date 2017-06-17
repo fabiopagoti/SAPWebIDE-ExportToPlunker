@@ -9,9 +9,9 @@ alt="Export to Plunker in the SAP Web IDE" width="640" height="360" /></a>
 </p>
 
 
-#Getting started
+# Getting started
 
-##Create destination
+## Create destination
 
 Create a file without extension and past the following lines in the file:
 ```
@@ -26,7 +26,7 @@ URL=https\://sapwebideexporttoplunker-a6ac3f497.dispatcher.hana.ondemand.com
 ProxyType=Internet
 ```
 
-##Import destination
+## Import destination
 
 1. Open your HANA Cloud Platform Cockpit
 2. Go to Connectivity
@@ -34,7 +34,7 @@ ProxyType=Internet
 4. Import the created destination
 5. Save
 
-##SAPWebIDE Settings
+## SAPWebIDE Settings
 
 1. Start by restarting the SAPWebIDE
 2. Open settings
@@ -44,10 +44,10 @@ ProxyType=Internet
 6. Restart the SAPWebIDE
 
 
-#Contribute
+# Contribute
 
 This is a plugin from me as a developer to help you as a developer. If you have a great idea or just want to help your welcome to help me improving this plugin!
 
-#Contact
+# Contact
 
 You're always welcome to update me about bugs at wouterlemaire120@hotmail.com
