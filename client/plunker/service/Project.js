@@ -40,95 +40,82 @@ define({
 	},
 	getProjectFiles: function(folder) {
 		var me = this;
-		//var deferred = $.Deferred();
 		var folders = [];
-		return new Promise(function(resolve, reject) {
-			folder.getFolderContent().then(function(content) {
-				var filesContent = [];
-				var aContent = [];
-				for (var i = 0; i < content.length; i++) {
-					var item = content[i];
-					if (item.getType() === "folder") {
-						//repeat
-						folders.push(me.getProjectFiles(item)); //item.getFolderContent());
-						//me.getFiles(item,callback);
-					} else {
-						var entity = item.getEntity();
-						if (entity.getFullPath().toUpperCase().indexOf('WEBAPP') >= 0 && 
-							entity.getName().toUpperCase().indexOf('.JPG') === -1 && 
-							entity.getName().toUpperCase().indexOf('.JPEG') === -1 && 
-							entity.getName().toUpperCase().indexOf('.PNG') === -1) {
-							var file = {};
-							file.filename = entity.getParentPath() + "/" + entity.getName();
-							file.filename = file.filename.substr(file.filename.toUpperCase().indexOf("WEBAPP") + 7);
-							filesContent.push(file);
-							//me.files[file.filename] = file;
-							aContent.push(item.getContent());
-							// item.getContent().then(function(fileContent) {
-							// 	file.content = fileContent;
-							// 	me.files[file.filename] = file;
-							// 	//	deferred.resolve(file);
-							// });
-						}
+		return folder.getFolderContent().then(function(content) {
+			var filesContent = [];
+			var aContent = [];
+			for (var i = 0; i < content.length; i++) {
+				var item = content[i];
+				if (item.getType() === "folder") {
+					//repeat
+					folders.push(me.getProjectFiles(item)); //item.getFolderContent());
+					//me.getFiles(item,callback);
+				} else {
+					var entity = item.getEntity();
+					if (entity.getFullPath().toUpperCase().indexOf('WEBAPP') >= 0 &&
+						entity.getName().toUpperCase().indexOf('.JPG') === -1 &&
+						entity.getName().toUpperCase().indexOf('.JPEG') === -1 &&
+						entity.getName().toUpperCase().indexOf('.PNG') === -1) {
+						var file = {};
+						file.filename = entity.getParentPath() + "/" + entity.getName();
+						file.filename = file.filename.substr(file.filename.toUpperCase().indexOf("WEBAPP") + 7);
+						filesContent.push(file);
+						aContent.push(item.getContent());
 					}
 				}
-				Promise.all(aContent).then(function(contents) {
-					for (var j = 0; j < contents.length; j++) {
-						//me.files[filesContent[j].filename].content = contents[j];
-						if (filesContent[j].filename.toUpperCase().indexOf("INDEX") > -1) {
-							contents[j] = contents[j].replace("../../", "https://sapui5.hana.ondemand.com/");
-						}
-						filesContent[j].content = contents[j];
+			}
+			return Promise.all(aContent).then(function(contents) {
+				for (var j = 0; j < contents.length; j++) {
+					if (filesContent[j].filename.toUpperCase().indexOf("INDEX") > -1) {
+						contents[j] = contents[j].replace("../../", "https://sapui5.hana.ondemand.com/");
 					}
-					if (folders && folders.length > 0) {
-						Promise.all(folders).then(function(values) {
-							values.push(filesContent);
-							var aFiles = [].concat.apply([], values);
-							resolve(aFiles);
-						});
-					} else {
-						resolve(filesContent);
-					}
-				});
+					filesContent[j].content = contents[j];
+				}
+				if (folders && folders.length > 0) {
+					return Promise.all(folders).then(function(values) {
+						values.push(filesContent);
+						var aFiles = [].concat.apply([], values);
+						return aFiles;
+					});
+				} else {
+					return filesContent;
+				}
 			});
 		});
 	},
 
 	hasWebAppFolder: function(folder) {
 		var me = this;
-		//var deferred = $.Deferred();
-		return new Promise(function(resolve, reject) {
-			folder.getFolderContent().then(function(content) {
-				var folders = [];
-				var webapp = false;
-				for (var i = 0; i < content.length; i++) {
-					var item = content[i];
-					if (item.getType() === "folder") {
-						//repeat
-						var entity = item.getEntity();
-						if (entity.getFullPath().toUpperCase().indexOf('WEBAPP') >= 0) {
-							webapp = true;
-						} else {
-							folders.push(me.hasWebAppFolder(item));
-						}
+		return folder.getFolderContent().then(function(content) {
+			var folders = [];
+			var webapp = false;
+			for (var i = 0; i < content.length; i++) {
+				var item = content[i];
+				if (item.getType() === "folder") {
+					//repeat
+					var entity = item.getEntity();
+					if (entity.getFullPath().toUpperCase().indexOf('WEBAPP') >= 0) {
+						webapp = true;
+					} else {
+						folders.push(me.hasWebAppFolder(item));
 					}
 				}
-				if (webapp) {
-					return resolve(webapp);
-				} else if (folders && folders.length > 0) {
-					Promise.all(folders).then(function(values) {
-						for (var j = 0; j < values.length; j++) {
-							if (values[j]) {
-								return resolve(true);
-							}
+			}
+			if (webapp) {
+				return webapp;
+			} else if (folders && folders.length > 0) {
+				return Promise.all(folders).then(function(values) {
+					for (var j = 0; j < values.length; j++) {
+						if (values[j]) {
+							return true;
 						}
-						return resolve(false);
-					});
-				} else {
-					return resolve(webapp);
-				}
+					}
+					return false;
+				});
+			} else {
+				return webapp;
+			}
 
-			});
 		});
 	}
 });

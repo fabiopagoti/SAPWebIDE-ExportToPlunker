@@ -4,6 +4,7 @@
 	"i18n": "plunker/i18n/i18n",
 	"requires": {
 		"services": [
+			"progress",
 			"ui5projecthandler",
 			"selection",
     		"perspective",
@@ -43,6 +44,9 @@
 				"id": "plunker.ExportPlunker",
 				"label": "{i18n>command_exportpluncker}",
 				"service": "plunker/command/ExportPlunker"
+			},{
+				"id": "plunker.OpenPlunker",
+				"service": "plunker/command/OpenPlunker"
 			}],
 
 			"commandGroup:groups": [{

@@ -20,6 +20,7 @@ define({
 
 	showMessage: function(url) {
 		// Display greeting notification and fire event
-		return this.context.service.usernotification.info("Plunker url: " +url);
+		window.open(url);
+		return this.context.service.usernotification.liteNotificationSuccess("Plunker generated","plunker.OpenPlunker",url,false);
 	}
 });
