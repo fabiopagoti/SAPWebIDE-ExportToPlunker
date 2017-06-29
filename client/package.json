@@ -1,10 +1,11 @@
 {
 	"name": "plunkerexport",
-	"title": "plunkerexport",
+	"title": "Export to Plunker",
 	"version": "1.0.0",
 	"description": "Export to plunker",
-	"homepage": "",
-	"icon": "",
+	"homepage": "http://www.flexso.be",
+	"icon": "https://dynatos.be/wp-content/uploads/2016/02/logo-flexso-blue.png",
+	"author":"Wouter Lemaire",
 	"bundledPlugins": {
 		"plunker": "file:plunker"
 	}
