@@ -17,7 +17,7 @@
  * 
  */
 define({
-
+	regex : /src=["]+[\W\w\d\s]*\/resources\/sap-ui-core.js"/g,
 	getSelectedProjectFiles: function() {
 		var me = this;
 		return this.context.service.selection.getSelection().then(function(aSelection) { // get project content
@@ -68,8 +68,14 @@ define({
 			}
 			return Promise.all(aContent).then(function(contents) {
 				for (var j = 0; j < contents.length; j++) {
+					
 					if (filesContent[j].filename.toUpperCase().indexOf("INDEX") > -1) {
-						contents[j] = contents[j].replace("../../", "https://sapui5.hana.ondemand.com/");
+						try{
+							contents[j] = contents[j].replace(me.regex, 'src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"');
+						}catch(ex){
+							
+						}
+						//contents[j] = contents[j].replace("../../", "https://sapui5.hana.ondemand.com/");
 					}
 					filesContent[j].content = contents[j];
 				}
