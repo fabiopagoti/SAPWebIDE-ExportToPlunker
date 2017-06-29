@@ -4,7 +4,6 @@
 	"version": "1.0.0",
 	"description": "Export to plunker",
 	"homepage": "http://www.flexso.be",
-	"icon": "https://dynatos.be/wp-content/uploads/2016/02/logo-flexso-blue.png",
 	"author":"Wouter Lemaire",
 	"bundledPlugins": {
 		"plunker": "file:plunker"
