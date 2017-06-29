@@ -55,7 +55,9 @@ define({
 					if (entity.getFullPath().toUpperCase().indexOf('WEBAPP') >= 0 &&
 						entity.getName().toUpperCase().indexOf('.JPG') === -1 &&
 						entity.getName().toUpperCase().indexOf('.JPEG') === -1 &&
-						entity.getName().toUpperCase().indexOf('.PNG') === -1) {
+						entity.getName().toUpperCase().indexOf('.PNG') === -1 &&
+						entity.getName().toUpperCase().indexOf('.ICO') === -1 &&
+						entity.getName().toUpperCase().indexOf('.ICON') === -1) {
 						var file = {};
 						file.filename = entity.getParentPath() + "/" + entity.getName();
 						file.filename = file.filename.substr(file.filename.toUpperCase().indexOf("WEBAPP") + 7);
