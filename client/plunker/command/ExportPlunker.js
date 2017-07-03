@@ -6,15 +6,18 @@
 define({
 	execute: function() {
 		var me = this;
+		var taskId;
 		//var taskId = this.context.service.progress.startTask("ExportPlunker", "Export to plunker");
-		return this.context.service.project.getSelectedProjectFiles().then(function(allFiles){
-			return me.context.service.plunker.sendFilesToPlunker(allFiles).then(function(url){
-				//return me.context.service.progress.stopTask(taskId).then(function(){
-					return me.context.service.message.showMessage(url);
-				//});
+		return this.context.service.progress.startTask("ExportPlunker", "Export to plunker").then(function(taskid) {
+			taskId = taskid;
+			me.context.service.project.getSelectedProjectFiles().then(function(allFiles) {
+				return me.context.service.plunker.sendFilesToPlunker(allFiles).then(function(url) {
+					return me.context.service.progress.stopTask(taskId).then(function() {
+						return me.context.service.message.showMessage(url);
+					});
+				});
 			});
-		})  ;            
-		
+		});
 	},
 
 	isAvailable: function() {
